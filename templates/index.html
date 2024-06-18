@@ -12,7 +12,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <style>
         body {
-            background: url('{{ url_for('static', filename='images/stechoq-logo.png') }}') no-repeat center center fixed;
+            background: url('{{ url_for('static', filename='images/logo.png') }}') no-repeat center center fixed;
             background-size: cover;
         }
         
@@ -80,12 +80,14 @@
         <h3>Upload Gambar Retina</h3>
         <form method="post" enctype="multipart/form-data">
             <input type="file" name="file">
-            <label for="model_choice">Choose a model:</label>
-            <select name="model_choice" id="model_choice">
-                <option value="model_1">Xception</option>
-                <option value="model_2">MobileNetv1</option>
-                <option value="model_3">VGG 16</option>
-            </select>
+             <div class="model-selection">
+        <label for="model_choice">Choose a model:</label>
+        <select name="model_choice" id="model_choice">
+            <option value="model_1">Xception</option>
+            <option value="model_2">MobileNetv1</option>
+            <option value="model_3">VGG 16</option>
+        </select>
+    </div>
             <input type="submit" value="Upload">
         </form>
 
