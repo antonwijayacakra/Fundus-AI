@@ -188,7 +188,7 @@ def delete_result(result_id):
 # Route to display results
 @app.route('/hasil')
 def hasil():
-    results = Prediction.query.order_by(Prediction.upload_date.asc()).all()
+    results = Prediction.query.order_by(Prediction.upload_date.desc()).all()
     return render_template('hasil.html', results=results)
 
 # Route to display team members
