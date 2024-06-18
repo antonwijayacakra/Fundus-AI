@@ -184,13 +184,14 @@ body::before {
 <div class="member-box">
     <div class="image-container">
         <img src="{{ url_for('static', filename='images/fatih.jpg') }}" alt="Gambar 1" class="member-image">
-        <img src="gambar2.jpg" alt="Gambar 2" class="member-image hidden">
-        <img src="gambar3.jpg" alt="Gambar 3" class="member-image hidden">
+        <img src="{{ url_for('static', filename='images/Xception.jpg') }}" alt="Gambar 2" class="member-image hidden">
+        <img src="{{ url_for('static', filename='images/Xception_summary.jpg') }}" alt="Gambar 3" class="member-image hidden">
     </div>
     <div class="description">
         <p class="desc1">Fatih Maulana Muhammad<br>Universitas Teknologi Yogyakarta</p>
-        <p class="desc2 hidden">Deskripsi anggota 2.</p>
-        <p class="desc3 hidden">Deskripsi anggota 3.</p>
+        <p class="desc2 hidden">Grafik akurasi latih dan validasi model Xception <br>  
+             Grafik akurasi pelatihan dan validasi selama 100 epoch. Dari pembelajaran menggunakan model tersebut didapatkan bahwa rata- rata akurasi training didaptkan 99 persen, akurasi validasi sebesar 75 persen, nilai validation loss adalah 1,64, dan nilai training loss adalah 0,42. Epoch terbaik didapatkan saat epoch ke 18. </p>
+        <p class="desc3 hidden">Detail nilai persentase akurasi dan nilai loss</p>
     </div>
     <div class="controls">
         <button class="prev-btn">&lt; Prev</button>
@@ -200,13 +201,13 @@ body::before {
 <div class="member-box">
     <div class="image-container">
         <img src="{{ url_for('static', filename='images/ana.jpg') }}" alt="Gambar 1" class="member-image">
-        <img src="gambar2.jpg" alt="Gambar 2" class="member-image hidden">
-        <img src="gambar3.jpg" alt="Gambar 3" class="member-image hidden">
+        <img src="{{ url_for('static', filename='images/Restnet.png') }}" alt="Gambar 2" class="member-image hidden">
+        <img src="{{ url_for('static', filename='images/Restnet_summary.jpg') }}" alt="Gambar 3" class="member-image hidden">
     </div>
     <div class="description">
         <p class="desc1">Ana Mariam<br>Politeknik Enjinering Indorama</p>
-        <p class="desc2 hidden">Deskripsi anggota 2.</p>
-        <p class="desc3 hidden">Deskripsi anggota 3.</p>
+        <p class="desc2 hidden">Grafik pembelajaran model Restnet</p>
+        <p class="desc3 hidden">Nilai Akurasi dan Loss pada Restnet</p>
     </div>
     <div class="controls">
         <button class="prev-btn">&lt; Prev</button>
@@ -216,13 +217,9 @@ body::before {
 <div class="member-box">
     <div class="image-container">
         <img src="{{ url_for('static', filename='images/natal.jpeg') }}" alt="Gambar 1" class="member-image">
-        <img src="gambar2.jpg" alt="Gambar 2" class="member-image hidden">
-        <img src="gambar3.jpg" alt="Gambar 3" class="member-image hidden">
     </div>
     <div class="description">
         <p class="desc1">Natal Diau Situmorang<br>Politeknik Negeri Medan</p>
-        <p class="desc2 hidden">Deskripsi anggota 2.</p>
-        <p class="desc3 hidden">Deskripsi anggota 3.</p>
     </div>
     <div class="controls">
         <button class="prev-btn">&lt; Prev</button>
