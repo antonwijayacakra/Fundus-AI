@@ -15,6 +15,32 @@
             background: url('{{ url_for('static', filename='images/stechoqlogo.png') }}') no-repeat center center fixed;
             background-size: cover;
         }
+        
+.model-selection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.model-selection label {
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.model-selection select {
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.model-selection select:focus {
+    border-color: #007bff;
+}
     </style>
 </head>
 <body>
