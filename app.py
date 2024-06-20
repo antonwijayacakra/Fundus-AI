@@ -20,9 +20,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Load the pre-trained Keras models
-model_1 = load_model('model-xception_fatih.h5')
-model_2 = load_model('mobilenetV1_model_tensorflowNew.h5')
-model_3 = load_model('vgg16_model_Tensorflownew.h5')
+model_1 = load_model('Model_AI/model-xception_fatih.h5')
+model_2 = load_model('Model_AI/mobilenetV1_model_tensorflowNew.h5')
+model_3 = load_model('Model_AI/vgg16_model_Tensorflownew.h5')
 
 # Define a function to load and preprocess the image
 def preprocess_image(img_path):
