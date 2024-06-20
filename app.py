@@ -20,9 +20,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Load the pre-trained Keras models
-model_1 = load_model('Model_AI/model-xception_fatih.h5')
-model_2 = load_model('Model_AI/mobilenetV1_model_tensorflowNew.h5')
-model_3 = load_model('Model_AI/vgg16_model_Tensorflownew.h5')
+models = {
+    'xception': load_model('model-xception_fatih.h5'),
+    'mobilenet': load_model('mobilenetV1_model_tensorflowNew.h5'),
+    'vgg16': load_model('vgg16_model_Tensorflownew.h5')
+}
 
 # Define a function to load and preprocess the image
 def preprocess_image(img_path):
@@ -32,7 +34,6 @@ def preprocess_image(img_path):
     img_array /= 255.0  # Rescale image
     return img_array
 
-# Dictionary with explanations for each condition
 condition_explanations = {
     'DR': Markup('''<h1>Diabetic Retinopathy</h1>
     <p>Diabetic retinopathy adalah komplikasi diabetes yang memengaruhi mata. Kondisi ini terjadi ketika tingginya kadar gula darah menyebabkan kerusakan pada pembuluh darah kecil di retina, yaitu jaringan sensitif cahaya yang terletak di bagian belakang mata. Diabetic retinopathy dapat menyebabkan pembengkakan, kebocoran, atau bahkan pertumbuhan pembuluh darah baru yang abnormal pada retina, yang pada akhirnya bisa menyebabkan kebutaan jika tidak diobati.</p>
@@ -123,55 +124,50 @@ condition_explanations = {
     ''')
 }
 
+# Define the Predictions model
 class Prediction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
     prediction = db.Column(db.String(50), nullable=False)
+    model = db.Column(db.String(50), nullable=False)  # New column for model name
     upload_date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
-# Home route
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        if 'file' not in request.files:
+        if 'file' not in request.files or 'model' not in request.form:
             return redirect(request.url)
-        
+
         file = request.files['file']
+        selected_model = request.form['model']
+        print(f"Selected model: {selected_model}")  # Debug statement
         if file.filename == '':
             return redirect(request.url)
 
-        # Determine which model to use
-        model_choice = request.form.get('model_choice')
-        
         if file:
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
-            
+
             img_array = preprocess_image(file_path)
-            
-            if model_choice == 'model_2':
-                prediction = model_2.predict(img_array)
-                class_labels = ['DR', 'glaucoma', 'normal']
-            elif model_choice == 'model_3':
-                prediction = model_3.predict(img_array)
-                class_labels = ['DR', 'glaucoma', 'normal']
-            else:
-                prediction = model_1.predict(img_array)
-                class_labels = [ 'DR', 'glaucoma', 'normal']
-            
+            model = models[selected_model]
+            prediction = model.predict(img_array)
+
             predicted_class = np.argmax(prediction, axis=1)[0]
+            class_labels = ['retinopathy', 'glaucoma', 'normal']
             predicted_label = class_labels[predicted_class]
-            
+
             explanation = condition_explanations[predicted_label]
-            
-            new_prediction = Prediction(filename=filename, prediction=predicted_label)
+
+            new_prediction = Prediction(filename=filename, prediction=predicted_label, model=selected_model)
+            print(f"New prediction: {new_prediction}")  # Debug statement
             db.session.add(new_prediction)
             db.session.commit()
-            
+
             return render_template('index.html', filename=filename, prediction=predicted_label, explanation=explanation)
-    
+
     return render_template('index.html', filename=None, prediction=None, explanation=None)
+
 
 # Route to display uploaded file
 @app.route('/uploads/<filename>')
@@ -185,7 +181,6 @@ def delete_result(result_id):
     db.session.commit()
     return redirect(url_for('hasil'))
 
-# Route to display results
 @app.route('/hasil')
 def hasil():
     results = Prediction.query.order_by(Prediction.upload_date.desc()).all()
