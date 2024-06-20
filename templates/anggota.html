@@ -221,10 +221,7 @@ body::before {
     <div class="description">
         <p class="desc1">Natal Diau Situmorang<br>Politeknik Negeri Medan</p>
     </div>
-    <div class="controls">
-        <button class="prev-btn">&lt; Prev</button>
-        <button class="next-btn">Next &gt;</button>
-    </div>
+    
 </div>
 </div>
 <section class="footer">
@@ -303,13 +300,7 @@ Natal Diau Situmorang</br>
             stopSlide(); // Hentikan interval saat tombol next diklik
         });
 
-        // Mulai slide otomatis saat halaman dimuat
-        startSlide();
-
-        // Hentikan slide otomatis saat pengguna melakukan hover pada gambar
-        box.addEventListener('mouseenter', stopSlide);
-        // Lanjutkan slide otomatis saat pengguna meninggalkan gambar
-        box.addEventListener('mouseleave', startSlide);
+        
     });
 
     // Animasi saat melakukan scroll
