@@ -35,7 +35,7 @@ def preprocess_image(img_path):
     return img_array
 
 condition_explanations = {
-    'retinopathy': Markup('''<h1>Diabetic Retinopathy</h1>
+    'DR': Markup('''<h1>Diabetic Retinopathy</h1>
     <p>Diabetic retinopathy adalah komplikasi diabetes yang memengaruhi mata. Kondisi ini terjadi ketika tingginya kadar gula darah menyebabkan kerusakan pada pembuluh darah kecil di retina, yaitu jaringan sensitif cahaya yang terletak di bagian belakang mata. Diabetic retinopathy dapat menyebabkan pembengkakan, kebocoran, atau bahkan pertumbuhan pembuluh darah baru yang abnormal pada retina, yang pada akhirnya bisa menyebabkan kebutaan jika tidak diobati.</p>
 
     <h1>Tahapan Diabetic Retinopathy</h1>
@@ -154,7 +154,7 @@ def index():
             prediction = model.predict(img_array)
 
             predicted_class = np.argmax(prediction, axis=1)[0]
-            class_labels = ['retinopathy', 'glaucoma', 'normal']
+            class_labels = ['DR', 'glaucoma', 'normal']
             predicted_label = class_labels[predicted_class]
 
             explanation = condition_explanations[predicted_label]
