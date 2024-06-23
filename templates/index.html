@@ -15,7 +15,7 @@
             background: url('{{ url_for('static', filename='images/logo.png') }}') no-repeat center center fixed;
             background-size: cover;
         }
-        
+                
 .model-selection {
     background-color: #fff;
     padding: 20px;
@@ -44,86 +44,69 @@
     </style>
 </head>
 <body>
-
-<header class="header">
-    <a href="{{ url_for('index') }}" class="logo">
-        <img src="{{ url_for('static', filename='images/stechoq-logo.png') }}" alt="logo">
-    </a>
+    <header class="header">
+        <a href="{{ url_for('static', filename='images/stechoq-logo.png') }}" class="logo">
+            <img src="{{ url_for('static', filename='images/stechoq-logo.png') }}" alt="logo">
+        </a>
+        <nav class="navbar">
+            <a href="{{ url_for('index') }}">Prediksi Gambar</a>
+            <a href="{{ url_for('hasil') }}">Hasil</a>
+            <a href="{{ url_for('anggota') }}">Anggota</a>
+            <a href="{{ url_for('beranda') }}">Beranda</a>
+        </nav>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </header>
     
-    <nav class="navbar">
-        <a href="{{ url_for('index') }}">Prediksi Gambar</a>
-        <a href="{{ url_for('hasil') }}">Hasil</a>
-        <a href="{{ url_for('anggota') }}">Anggota</a>
-        <a href="{{ url_for('beranda') }}">Beranda</a>
-    </nav>
-    <div class="fas fa-bars" id="menu-btn"></div>
-</header>
-
-<section class="predik" id="predik">
-    <div class="container">
-        <h1 class="heading">
-            <br><br><br>
-            <span>P</span>
-            <span>E</span>
-            <span>N</span>
-            <span>Y</span>
-            <span>A</span>
-            <span>K</span>
-            <span>I</span>
-            <span>T</span>
-            <br>
-            <span>M</span>
-            <span>A</span>
-            <span>T</span>
-            <span>A</span>
-        </h1>
-        <h3>Upload Gambar Retina</h3>
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-             <div class="model-selection">
-        <label for="model_choice">Choose a model:</label>
-        <select name="model_choice" id="model_choice">
-            <option value="model_1">Xception</option>
-            <option value="model_2">MobileNetv1</option>
-            <option value="model_3">VGG 16</option>
-        </select>
-    </div>
-            <input type="submit" value="Upload">
-        </form>
-
-        {% if filename %}
-        <h3>Uploaded Image:</h3>
-        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" style="max-width: 20rem; max-height: 20rem;">
-        
-        <h3>Prediction: {{ prediction }}</h3>
-        <p>{{ explanation }}</p>
-        {% endif %}
-    </div>
-</section>
-
-<section class="footer">
-    <div class="credit">
-        created by <span>Kelompok 3</span><br>
-        Muhamad Syalum<br>
-        Anton Wijaya<br>
-        Fatih Maulana Muhammad<br>
-        Bagus Haris Suhartono<br>
-        Ana Mariam<br>
-        Cut Salsabila Amani<br>
-        Natal Diau Situmorang<br>
-    </div>
-</section>
-
-<script>
-    let navbar = document.querySelector('.navbar');
+    <section class="predik" id="predik">
+        <div class="container">
+            <h1 class="heading">
+                <br><br><br>
+                <span>P</span><span>E</span><span>N</span><span>Y</span><span>A</span><span>K</span><span>I</span><span>T</span>
+                <br>
+                <span>M</span><span>A</span><span>T</span><span>A</span>
+            </h1>
+            <h3>Upload Gambar Retina</h3>
+            <form method="post" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <div class="model-selection">
+           <label for="model_choice">Choose a model:</label>
+                <select name="model">
+                    <option value="xception">Xception</option>
+                    <option value="mobilenet">MobileNetV1</option>
+                    <option value="vgg16">VGG16</option>
+                </select>
+                </div>
+                <input type="submit" value="Upload">
+            </form>
     
-    document.querySelector('#menu-btn').onclick = () => {
-        navbar.classList.toggle('active');
-    }
+            {% if filename %}
+            <h3>Uploaded Image:</h3>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" style="max-width: 20rem; max-height: 20rem;">
+            <h3>Prediction: {{ prediction }}</h3>
+            <p>{{ explanation }}</p>
+            {% endif %}
+        </div>
+    </section>
     
-    window.onscroll = () => {
-        navbar.classList.remove('active');
-    }
-</script>
-</body>
-</html>
+    <section class="footer">
+        <div class="credit">created by <span>Kelompok 3</span></br>
+            Muhamad Syalum</br>
+            Anton Wijaya</br>
+            Fatih Maulana Muhammad</br>
+            Bagus Haris Suhartono</br>
+            Ana Mariam</br>
+            Cut Salsabila Amani</br>
+            Natal Diau Situmorang</br>
+        </div>
+    </section>
+    <script>
+        let navbar = document.querySelector('.navbar');
+        document.querySelector('#menu-btn').onclick = () => {
+            navbar.classList.toggle('active');
+        }
+        window.onscroll = () => {
+            navbar.classList.remove('active');
+        }
+    </script>
+    </body>
+    </html>
